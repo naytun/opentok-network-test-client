@@ -2,8 +2,10 @@
 * Replace these with your OpenTok API key, a session ID for a routed OpenTok session,
 * and a token that has the publish role:
 */
+var request = require('request');
+
 var API_KEY = '46067482';
-var SESSION_ID = '1_MX40NjA2NzQ4Mn5-MTUyMDAyNzk3MDUwMX5FbFBLRnBLQmhTaXVOQXV1Kys0dEhBckl-UH4';
+var SESSION_ID = '2_MX40NjA2NzQ4Mn5-MTUyMDAyNjU4MTA3M35RdjdKaFdrWHF2aEpSRXFybFAyeDNzYXB-fg';
 var TOKEN = "T1==cGFydG5lcl9pZD00NjA2NzQ4MiZzaWc9MjY4MGQ2NTI0MGNkZjRiNzZlYTlkZWIwZGQ2NWFiMzM2OWZhZTc4YzpzZXNzaW9uX2lkPTFfTVg0ME5qQTJOelE0TW41LU1UVXlNREF5TnprM01EVXdNWDVRY1ZSSlJYSlFZa3hEYVVkME5tMTNTbEIxZVUxVFpHVi1mZyZjcmVhdGVfdGltZT0xNTIwMDI4MDc3Jm5vbmNlPTAuOTMyNTcwNDQzODkzNjA4OSZyb2xlPXB1Ymxpc2hlciZleHBpcmVfdGltZT0xNTIwMTE0NDc3JmluaXRpYWxfbGF5b3V0X2NsYXNzX2xpc3Q9";
 
 var TEST_TIMEOUT_MS = 15000; // 15 seconds
@@ -17,6 +19,21 @@ var subscriber;
 var statusContainerEl;
 var statusMessageEl;
 var statusIconEl;
+
+var getToken = function (callback) {
+  var url = 'https://altruli/herokuapp.com/session';
+  request(url, function (error, response, body) {
+    console.log('error:', error); // Print the error if one occurred
+    console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+    console.log('body:', body); // Print the HTML for the Google homepage.
+    SESSION_ID = body.sessionId;
+    TOKEN = body.token;
+    callback(body);
+  });
+}
+
+// Initialize session/token values
+getToken();
 
 var testStreamingCapability = function (subscriber, callback) {
   performQualityTest({ subscriber: subscriber, timeout: TEST_TIMEOUT_MS }, function (error, results) {
