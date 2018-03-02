@@ -388,7 +388,7 @@ function performQualityTest(config, callback) {
   window.setTimeout(cleanupAndReport, config.timeout);
 
   bandwidthCalculator.start(function (stats) {
-    console.log("stats");
+    // console.log("stats");
 
     // you could do something smart here like determine if the bandwidth is
     // stable or acceptable and exit early
