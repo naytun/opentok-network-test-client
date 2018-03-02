@@ -32,9 +32,6 @@ var getToken = function (callback) {
   });
 }
 
-// Initialize session/token values
-getToken();
-
 var testStreamingCapability = function (subscriber, callback) {
   performQualityTest({ subscriber: subscriber, timeout: TEST_TIMEOUT_MS }, function (error, results) {
     console.log('Test concluded', results);
@@ -191,14 +188,16 @@ document.addEventListener('DOMContentLoaded', function () {
   // This publisher uses the default resolution (640x480 pixels) and frame rate (30fps).
   // For other resoultions you may need to adjust the bandwidth conditions in
   // testStreamingCapability().
+  getToken(function (body) {
+    console.log(body);
+    publisher = OT.initPublisher(publisherEl, {}, callbacks.onInitPublisher);
 
-  publisher = OT.initPublisher(publisherEl, {}, callbacks.onInitPublisher);
-
-  session = OT.initSession(API_KEY, SESSION_ID);
-  session.connect(TOKEN, callbacks.onConnect);
-  statusContainerEl = document.getElementById('status_container');
-  statusMessageEl = statusContainerEl.querySelector('p');
-  statusIconEl = statusContainerEl.querySelector('img');
+    session = OT.initSession(API_KEY, SESSION_ID);
+    session.connect(TOKEN, callbacks.onConnect);
+    statusContainerEl = document.getElementById('status_container');
+    statusMessageEl = statusContainerEl.querySelector('p');
+    statusIconEl = statusContainerEl.querySelector('img');
+  });
 });
 
 // Helpers
