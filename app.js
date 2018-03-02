@@ -2,7 +2,7 @@
 * Replace these with your OpenTok API key, a session ID for a routed OpenTok session,
 * and a token that has the publish role:
 */
-var request = require('request');
+// var request = require('request');
 
 var API_KEY = '46067482';
 var SESSION_ID = '2_MX40NjA2NzQ4Mn5-MTUyMDAyNjU4MTA3M35RdjdKaFdrWHF2aEpSRXFybFAyeDNzYXB-fg';
@@ -188,16 +188,17 @@ document.addEventListener('DOMContentLoaded', function () {
   // This publisher uses the default resolution (640x480 pixels) and frame rate (30fps).
   // For other resoultions you may need to adjust the bandwidth conditions in
   // testStreamingCapability().
-  getToken(function (body) {
-    console.log(body);
-    publisher = OT.initPublisher(publisherEl, {}, callbacks.onInitPublisher);
 
-    session = OT.initSession(API_KEY, SESSION_ID);
-    session.connect(TOKEN, callbacks.onConnect);
-    statusContainerEl = document.getElementById('status_container');
-    statusMessageEl = statusContainerEl.querySelector('p');
-    statusIconEl = statusContainerEl.querySelector('img');
-  });
+  // getToken(function (body) {
+  // console.log(body);
+  publisher = OT.initPublisher(publisherEl, {}, callbacks.onInitPublisher);
+
+  session = OT.initSession(API_KEY, SESSION_ID);
+  session.connect(TOKEN, callbacks.onConnect);
+  statusContainerEl = document.getElementById('status_container');
+  statusMessageEl = statusContainerEl.querySelector('p');
+  statusIconEl = statusContainerEl.querySelector('img');
+  // });
 });
 
 // Helpers
