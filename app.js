@@ -83,7 +83,7 @@ var testStreamingCapability = function (subscriber, callback) {
     publisher.publishVideo(false);
 
     performQualityTest({ subscriber: subscriber, timeout: 5000 }, function (error, results) {
-      consoler.log(">> results: ", results);
+      console.log(">> results: ", results);
       var audioSupported = results.audio.bitsPerSecond > 25000 &&
         results.audio.packetLossRatioPerSecond < 0.05;
 
@@ -388,7 +388,7 @@ function performQualityTest(config, callback) {
   window.setTimeout(cleanupAndReport, config.timeout);
 
   bandwidthCalculator.start(function (stats) {
-    console.log(stats);
+    console.log("stats");
 
     // you could do something smart here like determine if the bandwidth is
     // stable or acceptable and exit early
