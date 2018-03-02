@@ -34,6 +34,7 @@ var statusIconEl;
 
 var testStreamingCapability = function (subscriber, callback) {
   performQualityTest({ subscriber: subscriber, timeout: TEST_TIMEOUT_MS }, function (error, results) {
+    console.log(">> Video Speed: %s KBps", Math.round(results.video.bitsPerSecond / 8 / 1024));
     console.log('Test concluded', results);
     // If we tried to set video constraints, but no video data was found
     if (!results.video) {
@@ -83,7 +84,6 @@ var testStreamingCapability = function (subscriber, callback) {
     publisher.publishVideo(false);
 
     performQualityTest({ subscriber: subscriber, timeout: 5000 }, function (error, results) {
-      console.log(">> Video Speed: %s KBps", Math.round(results.video.bitsPerSecond / 8 / 1024));
       var audioSupported = results.audio.bitsPerSecond > 25000 &&
         results.audio.packetLossRatioPerSecond < 0.05;
 
