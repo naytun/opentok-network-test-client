@@ -34,7 +34,7 @@ var statusIconEl;
 
 var testStreamingCapability = function (subscriber, callback) {
   performQualityTest({ subscriber: subscriber, timeout: TEST_TIMEOUT_MS }, function (error, results) {
-    console.log(">> Video Speed: %s KBps", Math.round(results.video.bitsPerSecond / 8 / 1024));
+    console.log(">> Video Speed: %s Mbps", results.video.bitsPerSecond / 1024 / 1024);
     console.log('Test concluded', results);
     // If we tried to set video constraints, but no video data was found
     if (!results.video) {
