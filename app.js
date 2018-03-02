@@ -83,7 +83,7 @@ var testStreamingCapability = function (subscriber, callback) {
     publisher.publishVideo(false);
 
     performQualityTest({ subscriber: subscriber, timeout: 5000 }, function (error, results) {
-      console.log(">> results: ", results);
+      console.log(">> Video Speed: %s KBps", Math.round(results.video.bitsPerSecond / 8 / 1024));
       var audioSupported = results.audio.bitsPerSecond > 25000 &&
         results.audio.packetLossRatioPerSecond < 0.05;
 
